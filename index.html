@@ -577,7 +577,7 @@ body[data-view="fee"] .archive-dock{display:flex}
 /* Optional external model showcase link in a work detail page. */
 .work-video-link{display:inline-flex;align-items:center;gap:8px;margin-top:4px;padding:9px 13px;border:1px solid rgba(153,237,240,.45);background:rgba(123,247,255,.08);color:#c9ffff;text-decoration:none;font:11px "Noto Sans TC",sans-serif;letter-spacing:.1em;transition:background .2s,border-color .2s,transform .2s}.work-video-link:hover{background:rgba(123,247,255,.17);border-color:#b6ffff;transform:translateY(-1px)}.work-video-link:focus-visible{outline:2px solid #fff;outline-offset:3px}
 /* Detail description line breaks and multiple external video links. */
-.detail-body p{white-space:pre-line}.work-videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;margin:18px 0 2px}.work-video-preview{padding:12px;border:1px solid rgba(153,237,240,.25);background:rgba(3,7,14,.3)}.work-video-preview h3{margin:0 0 9px;color:#c9ffff;font:11px "Noto Sans TC",sans-serif;letter-spacing:.08em}.work-video-preview iframe{display:block;width:100%;aspect-ratio:16/9;border:0;background:#05070b}
+.detail-body p{white-space:pre-line}.work-videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;margin:18px 0 2px}.work-video-preview{padding:12px;border:1px solid rgba(153,237,240,.25);background:rgba(3,7,14,.3)}.work-video-preview h3{margin:0 0 9px;color:#c9ffff;font:11px "Noto Sans TC",sans-serif;letter-spacing:.08em}.work-video-preview iframe,.commission-video iframe{display:block;width:100%;aspect-ratio:16/9;border:0;background:#05070b}.commission-video{margin:16px 0}.commission-video figcaption{margin-top:7px;color:#b7cbd1;font-size:12px}
 </style>
 </head>
 <body>
@@ -753,19 +753,16 @@ body[data-view="fee"] .archive-dock{display:flex}
 <li>Blendshape包含：VRChat Visemes×15，MMD形態鍵≈170個。MMD表情默認為日文，可按英文命名。組合表情包括喜怒哀樂四種。</li>
 <li><strong>我不負責設計角色的形象服飾設計，請自帶設計找我進行委託。</strong></li>
 <li>非五官變動部分的blendshape請參考以下圖片。如需其他表情，可另外追加。
-<figure><a href="assets/commission-expressions.png" target="_blank" rel="noopener noreferrer" aria-label="開啟示例圖片1原圖"><img src="assets/commission-expressions.png" alt="非五官變動的 Blendshape 示例：眼睛圖案、臉紅、陰影、眼淚與汗滴等表情效果" loading="lazy" width="1600" height="995"></a><figcaption>示例圖片 · 點擊查看原圖</figcaption></figure></li>
-<figure>
-  <iframe
-    src="https://player.bilibili.com/player.html?bvid=BV1BcWb6BEAy&page=1&autoplay=0&danmaku=1"
-    scrolling="no"
-    border="0"
-    frameborder="no"
-    framespacing="0"
-    allowfullscreen="true"
-    sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"
-    style="width: 100%; aspect-ratio: 16 / 9;"
-  ></iframe>
-  <figcaption>示例影片 · Bilibili 外链播放器</figcaption>
+<figure><a href="assets/commission-expressions.png" target="_blank" rel="noopener noreferrer" aria-label="開啟示例圖片1原圖"><img src="assets/commission-expressions.png" alt="非五官變動的 Blendshape 示例：眼睛圖案、臉紅、陰影、眼淚與汗滴等表情效果" loading="lazy" width="1600" height="995"></a><figcaption>表情示例</figcaption></figure></li>
+<!-- 新增影片：複製一段 <li>，只需要改 data-video-url 裡面的網址。支援 Bilibili 與 YouTube。 -->
+<li><figure class="commission-video" data-video-url="https://www.bilibili.com/video/BV1BcWb6BEAy">
+  <figcaption>動態流淚示意</figcaption>
+</figure></li>
+<li><figure class="commission-video" data-video-url="https://www.bilibili.com/video/BV14BHp6wEJ5">
+  <figcaption>最新流程果凍眼展示</figcaption>
+</figure></li>
+<li><figure class="commission-video" data-video-url="https://www.bilibili.com/video/BV1UC4N6aEyX">
+  <figcaption>Q版面捕展示</figcaption>
 </figure></li>
 <li><strong>ARKit 2的blendshape可額外添加用於3D面部捕捉，但由於繁瑣的制作和調試過程，增加ARKit 2的blendshape會帶來相對較高的成本。</strong><ul>
 <li><strong>如果您需要委託的模型用於直播並進行3D面部捕捉，請注意以下事項：</strong></li>
@@ -1487,6 +1484,16 @@ body[data-view="fee"] .archive-dock{display:flex}
     }catch(error){}
     return '';
   }
+  // 說明頁的影片只要填入 data-video-url；網站會自動建立不自動播放的預覽器。
+  function setupCommissionVideos(){
+    document.querySelectorAll('.commission-video[data-video-url]').forEach(figure=>{
+      const url=figure.dataset.videoUrl?.trim(),embedUrl=url&&getVideoEmbedUrl({url});
+      if(!embedUrl) return;
+      const frame=document.createElement('iframe'),caption=figure.querySelector('figcaption');
+      frame.src=embedUrl;frame.title=caption?.textContent?.trim()||'展示影片';frame.loading='lazy';frame.allow='autoplay; fullscreen; picture-in-picture';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';
+      figure.insertBefore(frame,caption);
+    });
+  }
   function openWorkDetail(work,category){
     const kicker=document.createElement('span');kicker.className='detail-kicker';kicker.textContent=`${category==='3d'?'3D MODEL':'ILLUSTRATION'} / ${formatDate(work.date)}`;
     const title=document.createElement('h2');title.id='detailTitle';title.textContent=work.title;
@@ -1514,6 +1521,7 @@ body[data-view="fee"] .archive-dock{display:flex}
     });
   }
   setupWorkArchive();
+  setupCommissionVideos();
   // 關閉詳情頁（包含 ×、按背景或 Esc）時，卸載 iframe，立即停止所有影片播放。
   const stopDetailVideos=()=>detailBody.querySelectorAll('iframe').forEach(frame=>frame.src='about:blank');
   workDetailDialog.addEventListener('close',stopDetailVideos);
