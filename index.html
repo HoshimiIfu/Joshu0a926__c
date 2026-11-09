@@ -722,7 +722,7 @@ body[data-view="fee"] .archive-dock{display:flex}
 </ul></section>
 <section><h3>當郵件提交後</h3><ul>
 <li>我會在工作日的72小時內回復。</li>
-<li>您需要提供以下資料以進行委託：<ul><li><strong>能夠清楚展示全部設計的參考圖（必須）</strong></li><li><strong>清晰的正面參考圖（盡量提供）</strong></li><li><strong>三視圖（盡量提供）</strong></li><li><strong>您所委託的模型的使用用途（MMD、VRChat或直播使用）</strong></li><li><strong>是否需要定製紋理</strong></li></ul></li>
+<li>您需要提供以下資料以進行委託：<ul><li><strong>能夠清楚展示全部設計的參考圖（必須）</strong></li><li><strong>清晰的正面參考圖（盡量提供）</strong></li><li><strong>三視圖（盡量提供）</strong></li><li><strong>您所委託的模型的使用用途（MMD、VRChat或直播使用）</strong></li><li><strong>是否需要我來繪製原畫</strong></li></ul></li>
 <li>如果沒有保密的選項，默認我可以在直播時製作。</li>
 </ul></section>
 <section><h3>權利所屬</h3><h4>價目表中的價格包含商用使用、分發模型等權利。</h4><ul>
@@ -732,7 +732,7 @@ body[data-view="fee"] .archive-dock{display:flex}
 </ul></section>
 <section><h3>委託價目表</h3><h4><strong>正比模型製作</strong></h4><ul>
 <li><strong>不包含骨骼綁定・僅建模 ：1300 USD+</strong></li><li><strong>包含骨骼綁定與Unity設定：1700 USD+</strong></li></ul>
-<h4>Q版模型製作</h4><ul><li><strong>包含骨骼綁定與Unity設定：1000 USD+。包含原畫和完美同步面捕，贈送動態流淚和動態流汗表情（不包含設計）</strong></li></ul>
+<h4>Q版模型製作</h4><ul><li><strong>包含骨骼綁定與Unity設定：1000 USD+。包含原畫和完美同步面捕，贈送動態流淚和動態流汗表情、高精度果凍眼（不包含設計）</strong></li></ul>
 <p><strong><em>在人物設計比較簡單的情況下，價格會下調。</em></strong></p>
 <h4>需要額外收費的部分</h4><ul>
 <li><strong>長髮或設定圖中有很多細節和小部件，半脫外套</strong></li>
@@ -750,7 +750,7 @@ body[data-view="fee"] .archive-dock{display:flex}
 <li>若因我方問題導致無法進行委託，<strong>我將退還當前所有款項，並提供當前進度的源文件以及使用權限（若是理念不合等原因無法繼續合作，則不提供）給甲方，並給予補償。</strong></li>
 </ul></li></ul></section>
 <section><h3>我提供的服務</h3><ul>
-<li>基礎建模和細分（包含高模雕刻），UV展開，純手繪貼圖，Matcap貼圖繪製，Blendshape製作，材質調試（包含法線烘焙和製作），骨骼綁定（包含修復形變的輔助骨骼）<ul><li>綁定的部分，您可以自己找心怡的綁定師，也可以由我一條龍服務。</li></ul></li>
+<li>基礎建模和細分（包含高模雕刻），UV展開，純手繪貼圖，Matcap貼圖繪製，Blendshape製作，材質調試（包含法線烘焙和製作），骨骼綁定（包含修復形變的輔助骨骼），高精度果凍眼（Warudo限定）。<ul><li>綁定的部分，您可以自己找心怡的綁定師，也可以由我一條龍服務。</li></ul></li>
 <li>Blendshape包含：VRChat Visemes×15，VRM blendshape，MMD，各類表情總共400+左右。MMD表情默認為日文，可按英文命名。組合表情包括喜怒哀樂四種。</li>
 <li><strong>我不負責設計角色的形象服飾設計，請自帶設計找我進行委託。</strong></li>
 <li>非五官變動部分的blendshape請參考以下圖片。如需其他表情，可另外追加。
@@ -817,7 +817,7 @@ body[data-view="fee"] .archive-dock{display:flex}
    <fieldset><legend>基礎服務選擇 <small>必選・單選</small></legend>
     <label class="fee-option"><input type="radio" name="model" value="model-only" required><span>正比模型製作-不包含骨骼綁定・僅建模 <b>1300 USD+</b></span></label>
     <label class="fee-option"><input type="radio" name="model" value="model-rigged" required><span>正比模型製作-包含骨骼綁定與Unity設定 <b>1700 USD+</b></span></label>
-    <label class="fee-option"><input type="radio" name="model" value="chibi" required><span>Q版模型製作-包含骨骼綁定與Unity設定 <b>1000 USD+</b></span></label>
+    <label class="fee-option"><input type="radio" name="model" value="chibi" required><span>Q版模型製作-包含贈送的完美同步面捕、高精度果凍眼、兩個動態表情和材質配置 <b>1000 USD+</b></span></label>
    </fieldset>
    <fieldset><legend>所需格式 <small>必選・可多選</small></legend><p class="fee-format-note">除 unitypackage 外，多選格式需要額外支付費用。</p>
     <label class="fee-option"><input type="checkbox" name="format" value=".PMX"><span>.PMX <small>（MMD）</small></span></label>
@@ -1586,7 +1586,7 @@ body[data-view="fee"] .archive-dock{display:flex}
  const models={
   'model-only':{label:'正比模型製作-不包含骨骼綁定・僅建模',price:1300},
   'model-rigged':{label:'正比模型製作-包含骨骼綁定與Unity設定',price:1700},
-  chibi:{label:'Q版模型製作-包含骨骼綁定與Unity設定',price:1000}
+  chibi:{label:'Q版模型製作-包含贈送的完美同步面捕、高精度果凍眼、兩個動態表情和材質配置',price:1000}
  };
  const addons={body:{label:'需要完整素體',price:100},arkit:{label:'ARKit',price:100},texture:{label:'紋理定製',price:150}};
  const money=cents=>'USD '+(cents/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
