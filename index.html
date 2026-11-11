@@ -862,7 +862,7 @@ body[data-view="fee"] .archive-dock{display:flex}
   // Use the visitor's local month; Date handles December-to-January rollover.
   const bookingMonths=document.getElementById('bookingMonths');
   // 2027 年 3 月中旬（3 月 15 日）起空閒；此前均為忙碌。
-  const bookingAvailableFrom=new Date(2027,3,20);
+  const bookingAvailableFrom=new Date(2027,4,20);
   const bookingPeriods=[{label:'上旬',day:1},{label:'下旬',day:15}];
   let displayedBookingMonth='';
   function updateBookingMonths(now=new Date()){
